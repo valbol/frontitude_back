@@ -17,14 +17,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/weather', weatherRouts);
 
 mongoose
-    .connect(MONGODB_URL)
+    .connect(process.env.MONGODB_URL)
     .then(() => {
         console.log('Connected to %s', process.env.MONGODB_URL);
         console.log('App is running ... \n');
         console.log('Press CTRL + C to stop the process. \n');
         console.log(`Your port is ${process.env.PORT}`);
 
-        app.listen(PORT);
+        app.listen(process.env.PORT);
     })
     .catch((err) => {
         console.error('App starting error:', err.message);
