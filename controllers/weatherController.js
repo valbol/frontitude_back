@@ -12,11 +12,12 @@ const sequentialTable = new SequentialRoundRobin([KEY1, KEY2, KEY3]);
 const getCityForecast = async (req, res, next) => {
     let forecast;
     const cityKey = req.params.city;
+    const metric = req.params.metric;
     const { value } = sequentialTable.next();
-    console.log(`cityKey=${cityKey}`);
+    console.log(`cityKey=${cityKey} , metric=${metric}`);
     try {
         let response = await axios.get(
-            `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${value}&metric=true`
+            `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${value}&metric=${metric}`
         );
         forecast = response.data;
     } catch (err) {
